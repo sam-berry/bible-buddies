@@ -15,6 +15,7 @@ repeat with bud in buddyList
       set targetBuddy to buddy bud of service id targetService
       send bibleStudy to targetBuddy
   end tell
+  log "Sent study to " & bud
 end repeat
 
 on splitText(theText, theDelimiter)
