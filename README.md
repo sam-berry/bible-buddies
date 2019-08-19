@@ -25,3 +25,7 @@ Open **System Preferences** and navigate to **Security & Privacy**. Go to the **
 In order for Terminal to initialize new conversations with recipients it needs to have access to accessibility features.
 
 Open **System Preferences** and navigate to **Security & Privacy**. Go to the **Privacy** tab and select **Accessibility** in the list of options on the left. Add **Terminal** to the list of applications which have ability to control the computer.
+
+### 4. Enable text-forwarding on your phone
+
+In order to send SMS (green) texts from a computer, text-forwarding must be enabled. To do this, on your iPhone go to **Settings** > **Messages** > **Text Message Forwarding**. This should give you the option to enable your computer.
