@@ -1,24 +1,21 @@
-set bibleStudy to "God so loved the world that He gave Jesus"
+set bibleStudyRaw to readFile("/Users/berrysa/Documents/projects/bible-buddies/bible-study.txt")
 
-set num to "7342741615"
+set saveTID to text item delimiters
+set text item delimiters to "\n"
+set bibleStudy to bibleStudyRaw as text
+set text item delimiters to saveTID
 
 set allBuddies to do shell script "cat buddies.txt | xargs"
 
 set buddyList to splitText(allBuddies, ",")
 
 repeat with bud in buddyList
-  activate application "Messages"
-    tell application "System Events" to tell process "Messages"
-    key code 45 using command down           -- press Command + N to start a new window
-    keystroke num                            -- input the phone number
-    key code 36                              -- press Enter to focus on the message area
-    keystroke bibleStudy                     -- type some message
-    key code 36                              -- press Enter to send
+  tell application "Messages"
+      set targetService to id of service "SMS"
+      set targetBuddy to buddy bud of service id targetService
+      send bibleStudy to targetBuddy
   end tell
-  log "Sent study to " & bud
-  delay 1
 end repeat
-
 
 on splitText(theText, theDelimiter)
     set AppleScript's text item delimiters to theDelimiter
@@ -26,3 +23,10 @@ on splitText(theText, theDelimiter)
     set AppleScript's text item delimiters to ""
     return theTextItems
 end splitText
+
+on readFile(unixPath)
+    set foo to (open for access (POSIX file unixPath))
+    set txt to paragraphs of (read foo as «class utf8»)
+    close access foo
+    return txt
+end readFile
