@@ -43,7 +43,7 @@ In order to send SMS (green) texts from a computer, text-forwarding must be enab
 
 1. Open a Terminal window
 2. Run `git clone git@github.com:sam-berry/bible-buddies.git`
-  * This will install a new folder in your home folder called **`bible-buddies`**. Two important files for driving the program are in there, **`buddies.txt`** (to store the list of numbers) and **`bible-study.txt`** (to store the Bible study to send). These files can be modified with any text editor (TextEdit being a good one which comes with macOS) but they should not be moved. Remember to save after all modifications, before running the Bible Buddies program.
+    * This will install a new folder in your home folder called **`bible-buddies`**. Two important files for driving the program are in there, **`buddies.txt`** (to store the list of numbers) and **`bible-study.txt`** (to store the Bible study to send). These files can be modified with any text editor (TextEdit being a good one which comes with macOS) but they should not be moved. Remember to save after all modifications, before running the Bible Buddies program.
 
 ## Adding Buddies
 
