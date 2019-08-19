@@ -65,3 +65,5 @@ To send the Bible study saved in `bible-study.txt` to all of the recipients list
 ```
 cd bible-buddies && osascript bb.applescript
 ```
+
+<img src="instructions-data/success-text.png?raw=true" width="350">
