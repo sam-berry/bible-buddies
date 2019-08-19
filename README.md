@@ -14,12 +14,14 @@ Due to restrictions around mass texting, this software requires a bit of set up 
 
 Open the Messages app. If you are not already signed in with your Apple ID, get er dun and make sure that the account is enabled.
 
-### 2. Initialize a conversation with each recipient from your computer
-
-Apple does not allow new conversations to be programmatically initialized. In order to send a message using the Bible Buddies program, a conversation must be already present in the Messages app on your computer. If you open the Messages app and you can locate your conversation with a recipient, you are all set. If conversation history does not show up, send a new message to the recipient's number. Be sure to include an emoji.
-
-### 3. Enable Terminal to access Messages data
+### 2. Enable Terminal to access Messages data
 
 By default, applications are not allowed to access text messages and other sensitive data. But, you can totally trust this random application from the internet.
 
 Open **System Preferences** and navigate to **Security & Privacy**. Go to the **Privacy** tab and select **Full Disk Access** in the list of options on the left. Add **Terminal** to the list of applications which have full disk access.
+
+### 3. Enable Terminal to send keystrokes
+
+In order for Terminal to initialize new conversations with recipients it needs to have access to accessibility features.
+
+Open **System Preferences** and navigate to **Security & Privacy**. Go to the **Privacy** tab and select **Accessibility** in the list of options on the left. Add **Terminal** to the list of applications which have ability to control the computer.
