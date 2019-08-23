@@ -5,17 +5,28 @@ set text item delimiters to "\n"
 set bibleStudy to bibleStudyRaw as text
 set text item delimiters to saveTID
 
-set allBuddies to do shell script "cat buddies.txt | xargs"
+set allBuddiesIMessage to do shell script "cat buddies-imessage.txt | xargs"
+set allBuddiesSms to do shell script "cat buddies-sms.txt | xargs"
 
-set buddyList to splitText(allBuddies, ",")
+set buddyListIMessage to splitText(allBuddiesIMessage, ",")
+set buddyListSms to splitText(allBuddiesSms, ",")
 
-repeat with bud in buddyList
+repeat with bud in buddyListIMessage
+  tell application "Messages"
+      set targetService to 1st service whose service type = iMessage
+      set targetBuddy to buddy bud of targetService
+      send bibleStudy to targetBuddy
+  end tell
+  log "Sent iMessage study to " & bud
+end repeat
+
+repeat with bud in buddyListSms
   tell application "Messages"
       set targetService to id of service "SMS"
       set targetBuddy to buddy bud of service id targetService
       send bibleStudy to targetBuddy
   end tell
-  log "Sent study to " & bud
+  log "Sent SMS study to " & bud
 end repeat
 
 on splitText(theText, theDelimiter)
