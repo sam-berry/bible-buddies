@@ -27,12 +27,16 @@ repeat with bud in buddyListIMessage
 end repeat
 
 repeat with bud in buddyListSms
-  tell application "Messages"
-      set targetService to id of service "SMS"
-      set targetBuddy to buddy bud of service id targetService
-      send bibleStudy to targetBuddy
-  end tell
-  writeLog("Sent SMS study to " & bud)
+  try
+    tell application "Messages"
+        set targetService to id of service "SMS"
+        set targetBuddy to buddy bud of service id targetService
+        send bibleStudy to targetBuddy
+    end tell
+    writeLog("Sent SMS study to " & bud)
+  on error the errorMessage number the errorNumber
+    writeLog("Error: " & errorNumber & " : " & errorMessage)
+  end try
 end repeat
 
 on writeLog(logMessage)
