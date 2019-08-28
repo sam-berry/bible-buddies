@@ -36,15 +36,15 @@ on writeLog(logMessage)
 end splitText
 
 on splitText(theText, theDelimiter)
-    set AppleScript's text item delimiters to theDelimiter
-    set theTextItems to every text item of theText
-    set AppleScript's text item delimiters to ""
-    return theTextItems
+  set AppleScript's text item delimiters to theDelimiter
+  set theTextItems to every text item of theText
+  set AppleScript's text item delimiters to ""
+  return theTextItems
 end splitText
 
 on readFile(unixPath)
-    set foo to (open for access (POSIX file unixPath))
-    set txt to paragraphs of (read foo as «class utf8»)
-    close access foo
-    return txt
+  set foo to (open for access (POSIX file unixPath))
+  set txt to paragraphs of (read foo as «class utf8»)
+  close access foo
+  return txt
 end readFile
