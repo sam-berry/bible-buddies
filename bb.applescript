@@ -21,7 +21,7 @@ repeat with bud in buddyListIMessage
         set targetBuddy to buddy bud of targetService
         send bibleStudy to targetBuddy
     end tell
-    writeLog("Sent iMessage study to " & bud)
+    writeLog("Attempt to send iMessage study to " & bud)
   on error the errorMessage number the errorNumber
     writeLog("Error: " & errorNumber & " : " & errorMessage)
   end try
@@ -34,15 +34,25 @@ repeat with bud in buddyListSms
         set targetBuddy to buddy bud of service id targetService
         send bibleStudy to targetBuddy
     end tell
-    writeLog("Sent SMS study to " & bud)
+    writeLog("Attempt to send SMS study to " & bud)
   on error the errorMessage number the errorNumber
     writeLog("Error: " & errorNumber & " : " & errorMessage)
   end try
 end repeat
 
+writeLog(" ")
+
 repeat with bud in buddyListIMessage
   try
-    log verifyStudyIsSent(bud)
+    verifyStudyIsSent(bud)
+  on error the errorMessage number the errorNumber
+    writeLog("Error: " & errorNumber & " : " & errorMessage)
+  end try
+end repeat
+
+repeat with bud in buddyListSms
+  try
+    verifyStudyIsSent(bud)
   on error the errorMessage number the errorNumber
     writeLog("Error: " & errorNumber & " : " & errorMessage)
   end try
@@ -51,9 +61,9 @@ end repeat
 on verifyStudyIsSent(phoneNumber)
   set matchingText to trim(findMatchingText(phoneNumber))
   if matchingText is "" then
-    log "Failed to send"
+    writeLog("🚨 Failed to send to " & phoneNumber)
   else
-    log "Send successful"
+    writeLog("✅ Study sent to " & phoneNumber)
   end if
 end verifyStudyIsSent
 
