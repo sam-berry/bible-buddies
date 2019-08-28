@@ -42,19 +42,32 @@ end repeat
 
 repeat with bud in buddyListIMessage
   try
-    log findMatchingTexts(bud)
+    log verifyStudyIsSent(bud)
   on error the errorMessage number the errorNumber
     writeLog("Error: " & errorNumber & " : " & errorMessage)
   end try
 end repeat
 
-on findMatchingTexts(phoneNumber)
+on verifyStudyIsSent(phoneNumber)
+  set matchingText to trim(findMatchingText(phoneNumber))
+  if matchingText is "" then
+    log "Failed to send"
+  else
+    log "Send successful"
+  end if
+end verifyStudyIsSent
+
+on findMatchingText(phoneNumber)
   return do shell script "sqlite3 /Users/berrysa/Library/Messages/chat.db \"select ROWID from message where handle_id in (select ROWID from handle where id like '%" & phoneNumber & "') and text like '%" & bibleStudyMini  & "%' limit 1;\""
-end splitText
+end findMatchingText
 
 on writeLog(logMessage)
   do shell script "echo " & quoted form of logMessage & " >> " & quoted form of logFile
 end splitText
+
+on trim(theText)
+  return (do shell script "echo \"" & theText & "\" | xargs")
+end trim
 
 on splitText(theText, theDelimiter)
   set AppleScript's text item delimiters to theDelimiter
