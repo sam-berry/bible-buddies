@@ -10,6 +10,8 @@ echo -e "⚡️🔥 \033[1mSCRIPT OUTPUT\033[0m 🌊🏄"
 
 cat log
 
+echo " "
+
 cat log >> forever-log
 
 rm log
