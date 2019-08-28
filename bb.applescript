@@ -14,12 +14,16 @@ set buddyListIMessage to splitText(allBuddiesIMessage, ",")
 set buddyListSms to splitText(allBuddiesSms, ",")
 
 repeat with bud in buddyListIMessage
-  tell application "Messages"
-      set targetService to 1st service whose service type = iMessage
-      set targetBuddy to buddy bud of targetService
-      send bibleStudy to targetBuddy
-  end tell
-  writeLog("Sent iMessage study to " & bud)
+  try
+    tell application "Messages"
+        set targetService to 1st service whose service type = iMessage
+        set targetBuddy to buddy bud of targetService
+        send bibleStudy to targetBuddy
+    end tell
+    writeLog("Sent iMessage study to " & bud)
+  on error the errorMessage number the errorNumber
+    writeLog("Error: " & errorNumber & " : " & errorMessage)
+  end try
 end repeat
 
 repeat with bud in buddyListSms
