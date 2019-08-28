@@ -1,3 +1,5 @@
+property logFile: "/Users/berrysa/Documents/projects/bible-buddies/log"
+
 set bibleStudyRaw to readFile("/Users/berrysa/Documents/projects/bible-buddies/bible-study.txt")
 
 set saveTID to text item delimiters
@@ -17,7 +19,7 @@ repeat with bud in buddyListIMessage
       set targetBuddy to buddy bud of targetService
       send bibleStudy to targetBuddy
   end tell
-  log "Sent iMessage study to " & bud
+  writeLog("Sent iMessage study to " & bud)
 end repeat
 
 repeat with bud in buddyListSms
@@ -28,6 +30,10 @@ repeat with bud in buddyListSms
   end tell
   log "Sent SMS study to " & bud
 end repeat
+
+on writeLog(logMessage)
+  do shell script "echo " & quoted form of logMessage & " >> " & quoted form of logFile
+end splitText
 
 on splitText(theText, theDelimiter)
     set AppleScript's text item delimiters to theDelimiter
