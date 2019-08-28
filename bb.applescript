@@ -32,7 +32,7 @@ repeat with bud in buddyListSms
       set targetBuddy to buddy bud of service id targetService
       send bibleStudy to targetBuddy
   end tell
-  log "Sent SMS study to " & bud
+  writeLog("Sent SMS study to " & bud)
 end repeat
 
 on writeLog(logMessage)
