@@ -25,6 +25,7 @@ repeat with bud in buddyListIMessage
   on error the errorMessage number the errorNumber
     writeLog("Error: " & errorNumber & " : " & errorMessage)
   end try
+  delay 1
 end repeat
 
 repeat with bud in buddyListSms
@@ -38,6 +39,7 @@ repeat with bud in buddyListSms
   on error the errorMessage number the errorNumber
     writeLog("Error: " & errorNumber & " : " & errorMessage)
   end try
+  delay 1
 end repeat
 
 writeLog(" ")
