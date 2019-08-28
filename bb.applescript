@@ -1,4 +1,5 @@
 property logFile: "/Users/berrysa/Documents/projects/bible-buddies/log"
+property bibleStudyMini: do shell script "head -c 30 /Users/berrysa/Documents/projects/bible-buddies/bible-study.txt"
 
 set bibleStudyRaw to readFile("/Users/berrysa/Documents/projects/bible-buddies/bible-study.txt")
 
@@ -38,6 +39,18 @@ repeat with bud in buddyListSms
     writeLog("Error: " & errorNumber & " : " & errorMessage)
   end try
 end repeat
+
+repeat with bud in buddyListIMessage
+  try
+    log findMatchingTexts(bud)
+  on error the errorMessage number the errorNumber
+    writeLog("Error: " & errorNumber & " : " & errorMessage)
+  end try
+end repeat
+
+on findMatchingTexts(phoneNumber)
+  return do shell script "sqlite3 /Users/berrysa/Library/Messages/chat.db \"select ROWID from message where handle_id in (select ROWID from handle where id like '%" & phoneNumber & "') and text like '%" & bibleStudyMini  & "%' limit 1;\""
+end splitText
 
 on writeLog(logMessage)
   do shell script "echo " & quoted form of logMessage & " >> " & quoted form of logFile
