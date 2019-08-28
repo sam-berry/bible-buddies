@@ -1,8 +1,8 @@
-property logFile: "/Users/berrysa/Documents/projects/bible-buddies/log"
-property bibleStudyMini: do shell script "head -c 30 /Users/berrysa/Documents/projects/bible-buddies/bible-study.txt"
+property bbHome: "/Users/berrysa/Documents/projects/bible-buddies"
+property logFile: bbHome & "/log"
+property bibleStudyMini: do shell script "head -c 30 " & bbHome & "/bible-study.txt"
 
-set bibleStudyRaw to readFile("/Users/berrysa/Documents/projects/bible-buddies/bible-study.txt")
-
+set bibleStudyRaw to readFile(bbHome & "/bible-study.txt")
 set saveTID to text item delimiters
 set text item delimiters to "\n"
 set bibleStudy to bibleStudyRaw as text
@@ -70,7 +70,7 @@ on verifyStudyIsSent(phoneNumber)
 end verifyStudyIsSent
 
 on findMatchingText(phoneNumber)
-  return do shell script "sqlite3 /Users/berrysa/Library/Messages/chat.db \"select ROWID from message where handle_id in (select ROWID from handle where id like '%" & phoneNumber & "') and text like '%" & bibleStudyMini  & "%' limit 1;\""
+  return do shell script "sqlite3 ~/Library/Messages/chat.db \"select ROWID from message where handle_id in (select ROWID from handle where id like '%" & phoneNumber & "') and text like '%" & bibleStudyMini  & "%' limit 1;\""
 end findMatchingText
 
 on writeLog(logMessage)
